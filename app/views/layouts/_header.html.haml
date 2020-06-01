@@ -1,9 +1,39 @@
-= link_to "Home", root_path
-- if user_signed_in?
-  = link_to "Account", edit_user_registration_path
-  = link_to "Logout", destroy_user_session_path, method: :delete
-  = link_to "Members", members_path
-  = link_to "Tenants", tenants_path
-- else
-  = link_to "Sign Up", new_user_registration_path
-  = link_to "Login", new_user_session_path
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+  %a.navbar-brand{:href => "/"}
+    Navbar
+  %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
+    %span.navbar-toggler-icon
+  #navbarSupportedContent.collapse.navbar-collapse
+    - if current_user
+      %ul.navbar-nav.mr-auto
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(root_path)}"}
+          = link_to root_path, class: 'nav-link' do
+            .fa.fa-home
+            Home
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(members_path)}"}
+          = link_to members_path, class: 'nav-link' do
+            .fa.fa-home
+            Members
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(tenants_path)}"}
+          = link_to tenants_path, class: 'nav-link' do
+            .fa.fa-home
+            Tenants
+      %ul.navbar-nav.mr-right
+        %li.nav-item.dropdown
+          %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+            %b= current_user.email
+          .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "navbarDropdown"}
+            = link_to edit_user_registration_path, class: "dropdown-item #{'active' if current_page?(edit_user_registration_path)}" do
+              .fa.fa-cog
+              %b Account settings
+            = link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do
+              .fa.fa-sign-out-alt
+              %b Sign out
+    - else
+      %ul.navbar-nav.mr-auto
+      %ul.navbar-nav.mr-right
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_registration_path)}"}
+          = link_to 'Register', new_user_registration_path, class: 'nav-link'
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_session_path)}"}
+          = link_to 'Login', new_user_session_path, class: 'nav-link'
+

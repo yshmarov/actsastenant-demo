@@ -1,9 +1,11 @@
 %h1 Listing members
 
-%table
+%table.table.table-striped.table-bordered.table-hover
   %thead
     %tr
+      %th id
       %th Tenant
+      %th Tenant id
       %th User
       %th
       %th
@@ -12,7 +14,9 @@
   %tbody
     - @members.each do |member|
       %tr
+        %td= member.id
         %td= member.tenant
+        %td= member.tenant.id
         %td= member.user
         %td= link_to 'Show', member
         %td= link_to 'Edit', edit_member_path(member)
