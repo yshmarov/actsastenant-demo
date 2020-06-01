@@ -1,30 +1,23 @@
 class TenantsController < ApplicationController
   before_action :set_tenant, only: [:show, :edit, :update, :destroy]
 
-  # GET /tenants
-  # GET /tenants.json
   def index
     @tenants = Tenant.all
   end
 
-  # GET /tenants/1
-  # GET /tenants/1.json
   def show
   end
 
-  # GET /tenants/new
   def new
     @tenant = Tenant.new
   end
 
-  # GET /tenants/1/edit
   def edit
   end
 
-  # POST /tenants
-  # POST /tenants.json
   def create
     @tenant = Tenant.new(tenant_params)
+    @member = Member.create!(user: current_user, tenant: @tenant) #when a tenant is created, the creator becomes a member
 
     respond_to do |format|
       if @tenant.save
@@ -37,8 +30,6 @@ class TenantsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /tenants/1
-  # PATCH/PUT /tenants/1.json
   def update
     respond_to do |format|
       if @tenant.update(tenant_params)
@@ -51,8 +42,6 @@ class TenantsController < ApplicationController
     end
   end
 
-  # DELETE /tenants/1
-  # DELETE /tenants/1.json
   def destroy
     @tenant.destroy
     respond_to do |format|
@@ -62,12 +51,10 @@ class TenantsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_tenant
       @tenant = Tenant.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def tenant_params
       params.require(:tenant).permit(:name, :subdomain)
     end
