@@ -18,10 +18,10 @@ class TenantsController < ApplicationController
 
   def create
     @tenant = Tenant.new(tenant_params)
-    @member = Member.create!(user: current_user, tenant: @tenant) #when a tenant is created, the creator becomes a member
 
     respond_to do |format|
       if @tenant.save
+        @member = Member.create!(user: current_user, tenant: @tenant) #when a tenant is created, the creator becomes a member
         format.html { redirect_to @tenant, notice: 'Tenant was successfully created.' }
         format.json { render :show, status: :created, location: @tenant }
       else
