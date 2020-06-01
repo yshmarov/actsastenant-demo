@@ -2,7 +2,8 @@ class TenantsController < ApplicationController
   before_action :set_tenant, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tenants = Tenant.all
+    #@tenants = Tenant.all
+    @tenants = Tenant.includes(:members).where(members: {user: current_user}) #user sees only his tenants
   end
 
   def show
