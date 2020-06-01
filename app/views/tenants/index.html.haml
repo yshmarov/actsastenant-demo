@@ -1,0 +1,23 @@
+%h1 Listing tenants
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Subdomain
+      %th
+      %th
+      %th
+
+  %tbody
+    - @tenants.each do |tenant|
+      %tr
+        %td= tenant.name
+        %td= tenant.subdomain
+        %td= link_to 'Show', tenant
+        %td= link_to 'Edit', edit_tenant_path(tenant)
+        %td= link_to 'Destroy', tenant, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Tenant', new_tenant_path
