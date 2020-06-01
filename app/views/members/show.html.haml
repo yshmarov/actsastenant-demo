@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Tenant:
+  = @member.tenant
+%p
+  %b User:
+  = @member.user
+
+= link_to 'Edit', edit_member_path(@member)
+\|
+= link_to 'Back', members_path
