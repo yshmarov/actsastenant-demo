@@ -21,3 +21,8 @@
 %br
 
 = link_to 'New Member', new_member_path
+
+%hr
+= form_tag invite_members_path, method: :get do
+  = email_field_tag 'email'
+  = submit_tag("Invite a member")

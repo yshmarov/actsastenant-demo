@@ -1,28 +1,39 @@
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy]
 
-  # GET /members
-  # GET /members.json
   def index
     @members = Member.all
   end
 
-  # GET /members/1
-  # GET /members/1.json
+  def invite
+    current_tenant = Tenant.first
+    email = params[:email]
+    user_from_email = User.where(email: email).first
+    if user_from_email.present?
+      if Member.where(user: user_from_email, tenant: current_tenant).any?
+        redirect_to members_path, alert: "The organisation #{current_tenant.name} already has a user with the email #{email}"
+      else
+        Member.create!(user: user_from_email, tenant: current_tenant)
+        #email confirmation
+        redirect_to members_path, notice: "#{email} was invited to join the organisation #{current_tenant.name}"
+      end
+    elsif user_from_email.nil?
+      new_user = User.invite!(email: email)
+      Member.create!(user: new_user, tenant: current_tenant)
+      redirect_to members_path, notice: "#{email} was invited to join the organisation #{current_tenant.name}"
+    end
+  end
+
   def show
   end
 
-  # GET /members/new
   def new
     @member = Member.new
   end
 
-  # GET /members/1/edit
   def edit
   end
 
-  # POST /members
-  # POST /members.json
   def create
     @member = Member.new(member_params)
 
@@ -37,8 +48,6 @@ class MembersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /members/1
-  # PATCH/PUT /members/1.json
   def update
     respond_to do |format|
       if @member.update(member_params)
@@ -51,8 +60,6 @@ class MembersController < ApplicationController
     end
   end
 
-  # DELETE /members/1
-  # DELETE /members/1.json
   def destroy
     @member.destroy
     respond_to do |format|
@@ -62,12 +69,10 @@ class MembersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_member
       @member = Member.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def member_params
       params.require(:member).permit(:tenant_id, :user_id)
     end
