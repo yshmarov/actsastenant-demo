@@ -22,3 +22,4 @@ end
 
 gem 'haml-rails'
 gem 'devise'
+gem 'simple_form'
