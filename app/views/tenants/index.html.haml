@@ -1,4 +1,10 @@
-%h1 Listing tenants
+%h3
+  .text-center
+    .fa.fa-graduation-cap
+    = controller_name.humanize + ":"
+    = action_name.humanize
+    .badge.badge-info
+      = @tenants.count
 
 %table.table.table-striped.table-bordered.table-hover
   %thead

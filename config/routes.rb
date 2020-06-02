@@ -5,7 +5,9 @@ Rails.application.routes.draw do
       patch :resend_invitation
     end
   end
-  resources :tenants
+  resources :tenants do
+    get :my, on: :collection
+  end
   devise_for :users
   root 'home#index'
   get 'home/index'
