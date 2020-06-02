@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_action :set_member, only: [:show, :edit, :update, :destroy]
+  before_action :set_member, only: [:show, :edit, :update, :destroy, :resend_invitation]
 
   def index
     @members = Member.all
@@ -21,6 +21,17 @@ class MembersController < ApplicationController
       new_user = User.invite!(email: email)
       Member.create!(user: new_user, tenant: current_tenant)
       redirect_to members_path, notice: "#{email} was invited to join the organisation #{current_tenant.name}"
+    end
+  end
+
+  def resend_invitation
+    if @member.user.present?
+      if @member.user.invitation_accepted?
+  	  	redirect_to members_path, alert: "User already exists with an email #{@member.user.email}"
+      else
+        @member.user.invite!
+  	  	redirect_to members_path, notice: "Invitation REsent to #{@member.user.email}"
+      end
     end
   end
 
