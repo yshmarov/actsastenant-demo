@@ -7,6 +7,9 @@ class User < ApplicationRecord
 
   has_many :members
   has_many :tenants, through: :members
+
+  #acts_as_tenant(:tenant)
+
   def to_s
     email
   end

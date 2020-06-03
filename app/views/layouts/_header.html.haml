@@ -26,6 +26,10 @@
           = link_to my_tenants_path, class: 'nav-link' do
             .fa.fa-home
             My Tenants
+        %li.nav-item
+          .nav-link
+            - if current_tenant.present?
+              = current_tenant.name
       %ul.navbar-nav.mr-right
         %li.nav-item.dropdown
           %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}

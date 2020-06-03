@@ -1,5 +1,7 @@
 # README
 
+SaaS (organisations can have many members; organisation is billed)
+
 haml
 devise
 simple_form
@@ -25,18 +27,19 @@ https://github.com/scambra/devise_invitable
 * If a user with this email does not exist, he gets an invitation email via devise invitable + he becomes a member. +
 * #Note: devise_invitable has invitation on User model. If User accepts invitation once, he accepts all of them!
 
-1.3. devise_invitable - new user, old member
-* A user can create a member without relation to another user in a tenant.
-* A user can invite another user to use the member record via email.
-
 1.3. devise_invitable - new user, resend invitation +
 * If the user has not confirmed his email, he can be re-invited +
+
+1.3. OPTIONAL: member of a tenant can exist without user?
+* devise_invitable - new user, old member
+** A user can create a member without relation to another user in a tenant.
+** A user can invite another user to use the member record via email.
 
 1.4. subdomains
 * When creating a tenant, a user can type in a subdomain. +
 * Subdomains have restriction (permitted names, uniqueness). +
-If he does not type in a subdomain, a random one is assigned.
 A user can edit his subdomain. +
+If he does not type in a subdomain, a random one is assigned.
 When a user select..
 
 1.2. acts_as_tenant
@@ -49,7 +52,11 @@ Alternative Easy way (no subdomains)
 * when a user selects a tenant, his tenant_id is updated.
 * now, he sees views scoped by this tenant.
 
-2. Tenant belongs_to plan
+2. Billing
+* rails g migration CreatePlans name:string price:integer billing_period:integer
+* Tenant belongs_to plan
+* #what if the app is modular and Tenant can select a lot of different billed features?
+* constraints {}
 
 3. Roles
 Roles are scoped by tenant.
