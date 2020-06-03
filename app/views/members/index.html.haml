@@ -1,4 +1,9 @@
-%h1 Listing members
+%h3
+  .text-center
+    = controller_name.humanize + ":"
+    = action_name.humanize
+    .badge.badge-info
+      = @members.count
 
 %table.table.table-striped.table-bordered.table-hover
   %thead

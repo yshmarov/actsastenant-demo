@@ -12,12 +12,12 @@ https://github.com/scambra/devise_invitable
 * User can see only tenants where he is a member.+
 
 1.1. Users
-* Users can exist without belonging to a member or a tenant.
-* User table and user personal pages exist.
+* Users can exist without belonging to a member or a tenant. +
+* User table and user show pages exist. +
 
 1.2. Tenants
-* My tenants scope
-* All tenants scope
+* My tenants scope +
+* All tenants scope +
 
 1.2. devise_invitable - new user, new member +
 * User can invite other users to become members of a tenant via email. +

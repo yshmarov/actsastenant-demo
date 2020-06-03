@@ -1,0 +1,23 @@
+%h3
+  .text-center
+    = controller_name.humanize + ":"
+    = action_name.humanize
+    .badge.badge-info
+      = @users.count
+
+%table.table.table-striped.table-bordered.table-hover
+  %thead
+    %tr
+      %th id
+      %th email
+      %th
+      %th Tenants
+
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.id
+        %td= user.email
+        %td= link_to 'Show', user
+        %td= user.tenants.compact.join(', ')
+%br
