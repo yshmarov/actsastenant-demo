@@ -47,6 +47,7 @@ Current_tenant is set by session/subdomain.
 Members are scoped by current_tenant.
 All models except User and Tenant are scoped by current_tenant.
 
+
 Alternative Easy way (no subdomains)
 * add a tenant_id to user table.
 * when a user selects a tenant, his tenant_id is updated.
@@ -72,3 +73,9 @@ Viewer:
 * Only view what moderator can do.
 
 4. ransack, public_activity, friendly_id
+
+
+find tenant by subdomain
+https://medium.com/@praaveen/multi-tenancy-and-sub-domain-lvh-with-rails-f364c9dc0566
+
+

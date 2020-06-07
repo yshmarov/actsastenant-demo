@@ -8,6 +8,7 @@
 %table.table.table-striped.table-bordered.table-hover
   %thead
     %tr
+      %th id
       %th Name
       %th Subdomain
       %th
@@ -17,6 +18,7 @@
   %tbody
     - @tenants.each do |tenant|
       %tr
+        %td= tenant.id
         %td= tenant.name
         %td= tenant.subdomain
         %td= link_to 'Show', tenant

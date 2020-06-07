@@ -4,12 +4,13 @@
   %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
     %span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
+    %ul.navbar-nav.mr-auto
+      %li.nav-item{class: "#{'active font-weight-bold' if current_page?(root_path)}"}
+        = link_to root_path, class: 'nav-link' do
+          .fa.fa-home
+          Home
     - if current_user
       %ul.navbar-nav.mr-auto
-        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(root_path)}"}
-          = link_to root_path, class: 'nav-link' do
-            .fa.fa-home
-            Home
         %li.nav-item{class: "#{'active font-weight-bold' if current_page?(members_path)}"}
           = link_to members_path, class: 'nav-link' do
             .fa.fa-home
@@ -30,6 +31,8 @@
           .nav-link
             - if current_tenant.present?
               = current_tenant.name
+            = current_tenant.present?
+            /= Tenant.find(1)
       %ul.navbar-nav.mr-right
         %li.nav-item.dropdown
           %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
@@ -42,10 +45,8 @@
               .fa.fa-sign-out-alt
               %b Sign out
     - else
-      %ul.navbar-nav.mr-auto
       %ul.navbar-nav.mr-right
         %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_registration_path)}"}
           = link_to 'Register', new_user_registration_path, class: 'nav-link'
         %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_session_path)}"}
           = link_to 'Login', new_user_session_path, class: 'nav-link'
-
