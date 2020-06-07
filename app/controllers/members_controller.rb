@@ -6,7 +6,6 @@ class MembersController < ApplicationController
   end
 
   def invite
-    current_tenant = Tenant.first
     email = params[:email]
     user_from_email = User.where(email: email).first
     if user_from_email.present?
@@ -85,6 +84,6 @@ class MembersController < ApplicationController
     end
 
     def member_params
-      params.require(:member).permit(:tenant_id, :user_id)
+      params.require(:member).permit(:user_id)
     end
 end

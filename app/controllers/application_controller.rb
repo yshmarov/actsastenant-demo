@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     #  set_current_tenant(nil)
     #end
 
-    #set_current_tenant(Tenant.first)
-    set_current_tenant(nil)
+    set_current_tenant(Tenant.second)
+    #set_current_tenant(nil)
   end
 end
