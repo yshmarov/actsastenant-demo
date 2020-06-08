@@ -1,13 +1,12 @@
 %nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
   %a.navbar-brand{:href => "/"}
-    Navbar
+    SaaS
   %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
     %span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.navbar-nav.mr-auto
       %li.nav-item{class: "#{'active font-weight-bold' if current_page?(root_path)}"}
         = link_to root_path, class: 'nav-link' do
-          .fa.fa-home
           Home
     - if current_user
       %ul.navbar-nav.mr-auto
@@ -32,6 +31,7 @@
             - if current_tenant.present?
               = current_tenant.name
             = current_tenant.present?
+            /= current_user.tenant
             /= Tenant.find(1)
       %ul.navbar-nav.mr-right
         %li.nav-item.dropdown

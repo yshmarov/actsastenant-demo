@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :members
   has_many :tenants, through: :members
 
-  #acts_as_tenant(:tenant)
+  #acts_as_tenant(:tenant) #will scope user list by tenant. tenant must exist
   belongs_to :tenant, required: false
 
   def to_s

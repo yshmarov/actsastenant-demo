@@ -8,17 +8,17 @@ simple_form
 https://github.com/scambra/devise_invitable
 
 1. Basic multitenant +
-* Human can create user.+
+* User can register in the application.+
 * User can create many tenants.+
-* When a user creates a tenant, he becomes a tenant member.+
-* User can see only tenants where he is a member.+
+* When a user creates a tenant, he becomes a tenant member. +
+* User can see a list of tenants where he is a member (my_tenants scope).+
+* User can see only tenants where he is a member.-
 
 1.1. Users
 * Users can exist without belonging to a member or a tenant. +
 * User table and user show pages exist. +
 
 1.2. Tenants
-* My tenants scope +
 * All tenants scope +
 
 1.2. devise_invitable - new user, new member +
