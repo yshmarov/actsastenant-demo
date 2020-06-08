@@ -1,5 +1,5 @@
 class TenantsController < ApplicationController
-  before_action :set_tenant, only: [:show, :edit, :update, :destroy]
+  before_action :set_tenant, only: [:show, :edit, :update, :destroy, :switch_tenant]
 
   def index
     @tenants = Tenant.all
@@ -8,6 +8,14 @@ class TenantsController < ApplicationController
   def my
     @tenants = Tenant.includes(:members).where(members: {user: current_user}) #user sees only his tenants
     render 'index'
+  end
+
+  def switch_tenant
+    #set_current_tenant(@tenant)
+    ActsAsTenant.without_tenant do
+      current_user.update_attribute(:tenant_id, @tenant.id)
+    end
+    redirect_to my_tenants_path, notice: "Tenant switched to #{current_user.tenant.name}"
   end
 
   def show
