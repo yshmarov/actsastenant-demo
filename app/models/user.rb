@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :tenants, through: :members
 
   #acts_as_tenant(:tenant)
-  belongs_to :tenant
+  belongs_to :tenant, required: false
 
   def to_s
     email
