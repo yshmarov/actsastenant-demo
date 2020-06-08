@@ -1,5 +1,5 @@
 class TenantsController < ApplicationController
-  before_action :set_tenant, only: [:show, :edit, :update, :destroy, :switch_tenant]
+  before_action :set_tenant, only: [:show, :edit, :update, :destroy, :switch]
 
   def index
     @tenants = Tenant.all
@@ -11,7 +11,7 @@ class TenantsController < ApplicationController
     render 'index'
   end
 
-  def switch_tenant
+  def switch
     #set_current_tenant(@tenant)
     if current_user.tenants.include?(@tenant)
       current_user.update_attribute(:tenant_id, @tenant.id)

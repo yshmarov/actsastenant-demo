@@ -25,7 +25,7 @@
             .badge.badge-success
               Current tenant
           - else
-            = link_to 'Switch tenant', switch_tenant_tenant_path(tenant), method: :patch, class: 'btn btn-sm btn-secondary'
+            = link_to 'Switch tenant', switch_tenant_path(tenant), method: :patch, class: 'btn btn-sm btn-secondary'
         %td= link_to 'Edit', edit_tenant_path(tenant)
         %td= link_to 'Destroy', tenant, method: :delete, data: { confirm: 'Are you sure?' }
 %br
