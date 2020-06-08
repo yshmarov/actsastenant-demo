@@ -17,7 +17,17 @@ class ApplicationController < ActionController::Base
     #  set_current_tenant(nil)
     #end
 
-    set_current_tenant(Tenant.second)
+    #set_current_tenant(Tenant.second)
     #set_current_tenant(nil)
+
+    if current_user
+      if current_user.tenant.present?
+        #Tenant.find(10)
+        #current_tenant = Tenant.find(params[:id])
+        set_current_tenant(current_user.tenant)
+      else
+        set_current_tenant(nil)
+      end
+    end
   end
 end
