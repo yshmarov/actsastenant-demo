@@ -36,6 +36,20 @@
       %ul.navbar-nav.mr-right
         %li.nav-item.dropdown
           %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+            - if current_tenant
+              %b= current_tenant.name
+            - else
+              %b Tenants
+          .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "navbarDropdown"}
+            - if current_tenant
+              = link_to tenant_path(current_tenant), class: "dropdown-item" do
+                .fa.fa-plus
+                = current_tenant.name
+            .dropdown-divider
+            = link_to new_tenant_path, class: "dropdown-item #{'active' if current_page?(new_tenant_path)}" do
+              New Tenant
+        %li.nav-item.dropdown
+          %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
             %b= current_user.email
           .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "navbarDropdown"}
             = link_to edit_user_registration_path, class: "dropdown-item #{'active' if current_page?(edit_user_registration_path)}" do

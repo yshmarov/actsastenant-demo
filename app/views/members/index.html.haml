@@ -14,12 +14,10 @@
       %th User
       %th
       %th
-      %th
-
   %tbody
     - @members.each do |member|
       %tr
-        %td= member.id
+        %td= link_to member.id, member
         %td= member.tenant
         %td= member.tenant.id
         %td
@@ -28,8 +26,7 @@
             = member.user
             - if member.user.created_by_invite?
               - unless member.user.invitation_accepted?
-                = link_to 'Resend Invitation', resend_invitation_member_path(member), method: :patch, class: 'btn btn-sm btn-secondary'
-        %td= link_to 'Show', member
+                = link_to 'Resend invitation', resend_invitation_member_path(member), method: :patch, class: 'btn btn-sm btn-secondary'
         %td= link_to 'Edit', edit_member_path(member)
         %td= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' }
 
