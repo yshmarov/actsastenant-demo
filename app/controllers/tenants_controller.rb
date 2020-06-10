@@ -19,6 +19,7 @@ class TenantsController < ApplicationController
       #  current_user.update_attribute(:tenant_id, @tenant.id)
       #end
       redirect_to my_tenants_path, notice: "Switched to tenant: #{current_user.tenant.name}"
+      #redirect_to tenant_path(current_user.tenant), notice: "Switched to tenant: #{current_user.tenant.name}"
     else
       redirect_to my_tenants_path, alert: "You are not authorized to access tenant: #{@tenant.name}"
     end
